@@ -34,4 +34,6 @@ public interface BillDetailDAO extends CrudDAO<BillDetail, Long> {
 //        }
 //    }
 
+//    public List<BillDetail> selectByBillId(Long billId);
+
 }

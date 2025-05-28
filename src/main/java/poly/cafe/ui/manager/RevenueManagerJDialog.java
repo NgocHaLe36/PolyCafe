@@ -99,8 +99,6 @@ public class RevenueManagerJDialog extends JDialog implements RevenueController 
     public RevenueManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-//        txtBegin.setText("2025-05-14");
-//        txtEnd.setText("2025-06-10");
 
     }
 

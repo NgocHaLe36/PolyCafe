@@ -40,7 +40,7 @@ public class XIcon {
      * @param path đường dẫn file hoặc tài nguyên
      */
     public static void setIcon(JLabel label, String path) {
-        label.setIcon(XIcon.getIcon(path, label.getWidth(), label.getHeight()));
+//        label.setIcon(XIcon.getIcon(path, label.getWidth(), label.getHeight()));
     }
     /**
      * Thay đổi icon của JLabel

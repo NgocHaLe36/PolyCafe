@@ -38,6 +38,18 @@ public class BillManagerJDialog extends JDialog implements BillController {
 
     @Override
     public void setForm(Bill entity) {
+        txtMaPhieu.setText(entity.getId().toString());
+        txtTheSo.setText(entity.getCardId().toString());
+        txtNguoiTao.setText(entity.getUsername());
+        txtThoiDiemTao.setText(entity.getCheckin().toString());
+        if (entity.getCheckout() != null) {
+            txtThoiDiemThanhToan.setText(entity.getCheckout().toString());
+        }
+        if (entity.getStatus() == 0) {
+            rdoServicing.setSelected(true);
+        } else {
+            rdoCompleted.setSelected(true);
+        }
         this.fillBillDetails();
     }
 
@@ -84,43 +96,37 @@ public class BillManagerJDialog extends JDialog implements BillController {
 
     @Override
     public void fillToTable() {
-    DefaultTableModel model = (DefaultTableModel) tblBillDetails.getModel();
-    model.setRowCount(0); // Xóa các dòng cũ
-    try {
+        DefaultTableModel model = (DefaultTableModel) tblBillDetails.getModel();
+        model.setRowCount(0); // Xóa các dòng cũ
+        try {
         Date begin = XDate.parse(txtBegin.getText(), "yyyy-MM-dd HH:mm:ss.SSS");
         Date end = XDate.parse(txtEnd.getText(), "yyyy-MM-dd HH:mm:ss.SSS");
         items = dao.findByTimeRange(begin, end); // Truy vấn dữ liệu
         for (Bill item : items) {
-            String status;
+            String statusStr;
             if (item.getStatus() == 0) {
-                status = "Chưa thanh toán";
+                statusStr = "Chưa thanh toán";
             } else if (item.getStatus() == 1) {
-                status = "Đã thanh toán";
+                statusStr = "Đã thanh toán";
             } else {
-                status = "Đã hủy";
+                statusStr = "Đã hủy";
             }
-
             String email = item.getUsername() + "@example.com";
-            
-            // Sửa ở đây: nếu thẻ là object Card, thì dùng getCard().getCardNumber()
-//            String cardId = item.getCard() != null ? item.getCard().getCardId() : "Không rõ";
-
             model.addRow(new Object[]{
                 item.getId(),
-                
-                item.getCardId(), // Sửa chỗ này
+                item.getCardId(),
                 XDate.toString(item.getCheckin(), "yyyy-MM-dd HH:mm:ss"),
-                status,
+                XDate.toString(item.getCheckout(), "yyyy-MM-dd HH:mm:ss"),
+                statusStr,
                 email,
-                false // for the checkbox column
+//                false // for the checkbox column
             });
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Lỗi khi tải dữ liệu hóa đơn!");
+        } catch (Exception e) {
+            e.printStackTrace(); // Ghi log lỗi nếu có
+            JOptionPane.showMessageDialog(null, "Lỗi khi tải dữ liệu hóa đơn!");
+        }
     }
-}
-
 
     public BillManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -584,42 +590,42 @@ public class BillManagerJDialog extends JDialog implements BillController {
 
     private void btnDeleteCheckedItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCheckedItemsActionPerformed
         // TODO add your handling code here:
-                this.deleteCheckedItems();
+        this.deleteCheckedItems();
     }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
 
     private void btnMoveLast1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveLast1ActionPerformed
         // TODO add your handling code here:
-                this.moveLast();
+        this.moveLast();
     }//GEN-LAST:event_btnMoveLast1ActionPerformed
 
     private void btnMoveNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveNext1ActionPerformed
         // TODO add your handling code here:
-                this.moveNext();
+        this.moveNext();
     }//GEN-LAST:event_btnMoveNext1ActionPerformed
 
     private void btnMovePrevious1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePrevious1ActionPerformed
         // TODO add your handling code here:
-                this.movePrevious();
+        this.movePrevious();
     }//GEN-LAST:event_btnMovePrevious1ActionPerformed
 
     private void btnMoveFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirst1ActionPerformed
         // TODO add your handling code here:
-                this.moveFirst();
+        this.moveFirst();
     }//GEN-LAST:event_btnMoveFirst1ActionPerformed
 
     private void btnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear1ActionPerformed
         // TODO add your handling code here:
-                this.clear();
+        this.clear();
     }//GEN-LAST:event_btnClear1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         // TODO add your handling code here:
-                this.delete();
+        this.delete();
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
-                this.update();
+        this.update();
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnCreate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreate1ActionPerformed

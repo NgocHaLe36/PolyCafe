@@ -26,7 +26,10 @@ public class Bill {
     private Date checkout;
     private Card card;
     private int status;
-//    private Card id;
+
+//    public int getCardId() {
+//        return cardId;
+//    }
 
     public enum Status {
         Pending, Completed, Canceled // thêm Canceled vào đây
@@ -44,22 +47,4 @@ public class Bill {
         return id;
     }
 }
-
-//    public Integer getCardId() {
-//        return cardId;
-//    }
-//
-//    public void setCardId(String cardId) {
-//        this.cardId = cardId;
-//    }
-
-
-//    public Bill(Long id, String username, Integer cardId, Date checkin, Date checkout, int status) {
-//        this.id = id;
-//        this.username = username;
-//        this.cardId = cardId;
-//        this.checkin = checkin;
-//        this.checkout = checkout;
-//        this.status = status;
-//    }
 

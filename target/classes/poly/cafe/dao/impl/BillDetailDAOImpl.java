@@ -13,9 +13,9 @@ import poly.cafe.util.XQuery;
  * @author lengh
  */
 public class BillDetailDAOImpl implements BillDetailDAO {
- String createSql = "…";
- String updateSql = "…";
- String deleteSql = "…";
+ String createSql = "INSERT INTO BillDetails (BillId, DrinkId, UnitPrice, Discount, Quantity) VALUES (?, ?, ?, ?, ?)";
+ String updateSql = "UPDATE BillDetails  + SET UnitPrice = ?, Discount = ?, Quantity = ? + WHERE BillId = ? AND DrinkId = ?";
+ String deleteSql = "DELETE FROM BillDetails\n" + "WHERE BillId = ? AND DrinkId = ?";
  String findAllSql = "SELECT bd.*, d.name AS drinkName FROM BillDetails bd JOIN Drinks d ON d.Id=bd.DrinkId ";
  String findByIdSql = "SELECT bd.*, d.name AS drinkName FROM BillDetails bd JOIN Drinks d ON d.Id=bd.DrinkId WHERE bd.Id=?";
  String findByBillIdSql = "SELECT bd.*, d.name AS drinkName FROM BillDetails bd JOIN Drinks d ON d.Id=bd.DrinkId WHERE bd.BillId=?";
@@ -58,5 +58,6 @@ public class BillDetailDAOImpl implements BillDetailDAO {
     public BillDetail findByUsername(Long username) {
         return null;
     }
+   
     
 }

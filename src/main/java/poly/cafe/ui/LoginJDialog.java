@@ -15,7 +15,9 @@ import poly.cafe.util.XDialog;
  * @author lengh
  */
 public class LoginJDialog extends javax.swing.JDialog implements LoginController {
-
+    
+    public boolean isLogin = false;
+    
     @Override
     public void open() {
         this.setLocationRelativeTo(null);
